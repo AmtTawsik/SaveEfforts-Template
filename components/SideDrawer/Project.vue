@@ -118,28 +118,28 @@ const detailsUpdateHandler = (event) => {
 					:aria-labelledby="`${key}-tab`">
 					<div v-if="tab.type === 'custom'">
 						<template v-if="tab.type === 'custom'" v-for="mtabs in tab?.tabs">
-							<SideDrawerTabsDetails v-if="mtabs.type === 'detail'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsDetails class="mb-4" v-if="mtabs.type === 'detail'" :key="currRecord" :data="currRecord"
 								:headers="mtabs.fields" :canEdit="mtabs.write"
 								@update-record="detailsUpdateHandler($event)" />
 
-							<SideDrawerTabsHistory v-else-if="mtabs.type === 'history'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsHistory class="mb-4" v-else-if="mtabs.type === 'history'" :key="currRecord" :data="currRecord"
 								:canEdit="mtabs.write" :headers="content.headers" />
 
-							<SideDrawerTabsPipeline v-else-if="mtabs.type === 'pipeline'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsPipeline class="mb-4" v-else-if="mtabs.type === 'pipeline'" :key="currRecord" :data="currRecord"
 								:pipelineField="mtabs.pipeline_field" :canEdit="mtabs.write"
 								@update-record="detailsUpdateHandler($event)" />
 
-							<SideDrawerTabsChips v-else-if="mtabs.type === 'chip'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsChips class="mb-4" v-else-if="mtabs.type === 'chip'" :key="currRecord" :data="currRecord"
 								:header="mtabs.field" :canEdit="mtabs.write"
 								@update-record="detailsUpdateHandler($event)" />
 
-							<SideDrawerTabsNotes v-else-if="mtabs.type === 'note'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsNotes class="mb-4" v-else-if="mtabs.type === 'note'" :key="currRecord" :data="currRecord"
 								:canEdit="mtabs.write" @update-record="detailsUpdateHandler($event)" />
 
-							<SideDrawerTabsDocuments v-else-if="mtabs.type === 'document'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsDocuments class="mb-4" v-else-if="mtabs.type === 'document'" :key="currRecord" :data="currRecord"
 								:canEdit="mtabs.write" @update-record="detailsUpdateHandler($event)" />
 
-							<SideDrawerTabsAssign v-else-if="mtabs.type === 'assign'" :key="currRecord" :data="currRecord"
+							<SideDrawerTabsAssign class="mb-4" v-else-if="mtabs.type === 'assign'" :key="currRecord" :data="currRecord"
 								:header="mtabs.field" :canEdit="mtabs.write" :store="toStore" />
 						</template>
 					</div>
