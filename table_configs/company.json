@@ -1,0 +1,209 @@
+{
+	"config": [
+		{
+			"name": "Name",
+			"is_primary": true,
+			"is_visible": true,
+			"parent": null,
+			"dropdown": false,
+			"field": "name",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"component": "RecordsTableDataDefault"
+		},
+		{
+			"name": "Website",
+			"is_visible": true,
+			"parent": null,
+			"dropdown": false,
+			"field": "website",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"component": "RecordsTableDataDefault"
+		},
+		{
+			"name": "Industry",
+			"is_visible": true,
+			"parent": null,
+			"field": "industry",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"is_group": true,
+			"component": "RecordsTableDataDefault",
+			"dropdown": true,
+			"options": [
+				{ "name": "Automobile", "value": "Automobile" },
+				{ "name": "Pharma", "value": "Pharma" },
+				{ "name": "Education", "value": "Education" },
+				{ "name": "Mining", "value": "Mining" },
+				{ "name": "Oil", "value": "Oil" },
+				{ "name": "Technology", "value": "Technology" }
+			]
+		},
+		{
+			"name": "Address",
+			"is_visible": true,
+			"parent": null,
+			"is_address_dropdown": true,
+			"field": "address",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"component": "RecordsTableDataDefault"
+		},
+		{
+			"name": "City",
+			"is_visible": true,
+			"parent": null,
+			"field": "city",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"is_group": true,
+			"component": "RecordsTableDataDefault",
+			"dropdown": false
+		},
+		{
+			"name": "Country",
+			"is_visible": true,
+			"parent": null,
+			"field": "country",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"is_group": true,
+			"component": "RecordsTableDataDefault",
+			"dropdown": true,
+			"options": [
+				{ "name": "United Kingdom", "value": "United Kingdom" },
+				{ "name": "United States", "value": "United States" },
+				{ "name": "Canada", "value": "Canada" },
+				{ "name": "Scandavian", "value": "Scandavian" },
+				{ "name": "Germany", "value": "Germany" },
+				{ "name": "European Union", "value": "European Union" },
+				{ "name": "Australia", "value": "Australia" }
+			]
+		},
+		{
+			"name": "Contact",
+			"is_visible": true,
+			"parent": null,
+			"dropdown": true,
+			"options": null,
+			"is_assign_dropdown": true,
+			"get_from": "contactStore",
+			"get_from_field": "full_name",
+			"get_from_value": "_id",
+			"assign_to_field": "contact",
+			"field": "contact",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"visibility": "iscontactVisible",
+			"component": "RecordsTableDataPeople2"
+		}
+	],
+
+	"tab_fields": {
+		"notes": {
+			"type": "note",
+			"fields": [
+				{
+					"name": "Notes",
+					"is_visible": true,
+					"table_view": true,
+					"parent": null,
+					"dropdown": false,
+					"field": "notes",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		},
+
+		"documents": {
+			"type": "document",
+			"fields": [
+				{
+					"name": "Documents",
+					"is_visible": true,
+					"table_view": false,
+					"parent": null,
+					"dropdown": false,
+					"field": "documentes",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		},
+
+		"history": {
+			"type": "history",
+			"fields": [
+				{
+					"name": "Update logs",
+					"is_visible": true,
+					"table_view": false,
+					"parent": null,
+					"dropdown": false,
+					"field": "update_logs",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		}
+	},
+	"roles": [
+		{
+			"name": "admin",
+			"apply_when": {
+				"%%true": {
+					"%function": {
+						"name": "is_admin"
+					}
+				}
+			},
+			"document_filters": {
+				"write": true,
+				"read": true
+			},
+			"read": true,
+			"write": true,
+			"insert": true,
+			"delete": true,
+			"search": true
+		},
+		{
+			"name": "employee",
+			"apply_when": {
+				"%%true": {
+					"%function": {
+						"name": "is_admin"
+					}
+				}
+			},
+			"document_filters": {
+				"write": true,
+				"read": true
+			},
+
+			"fields": {
+				"projects": {
+					"write": false,
+					"read": false
+				}
+			},
+			"read": true,
+			"write": false,
+			"insert": false,
+			"delete": false,
+			"search": true
+		}
+	]
+}

@@ -1,0 +1,251 @@
+{
+  "config": [
+    {
+      "name": "First name",
+      "is_visible": false,
+      "parent": null,
+      "dropdown": false,
+      "field": "first_name",
+      "type": "text",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDefault"
+    },
+    {
+      "name": "Last name",
+      "is_visible": false,
+      "parent": null,
+      "dropdown": false,
+      "field": "last_name",
+      "type": "text",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDefault"
+    },
+    {
+      "name": "Full name",
+      "is_primary": true,
+      "is_visible": true,
+      "parent": null,
+      "dropdown": false,
+      "field": "full_name",
+      "type": "text",
+      "is_add": false,
+      "is_update": false,
+      "combine": ["first_name", "last_name"],
+      "component": "RecordsTableDataDefault"
+    },
+    {
+      "name": "Email",
+      "is_visible": true,
+      "parent": null,
+      "dropdown": false,
+      "field": "primary_email",
+      "type": "email",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDefault"
+    },
+    {
+      "name": "Phone",
+      "is_visible": true,
+      "parent": null,
+      "dropdown": false,
+      "field": "primary_phone",
+      "type": "tel",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDefault"
+    },
+    {
+      "name": "Status",
+      "is_visible": true,
+      "parent": null,
+      "dropdown": true,
+      "options": [
+        { "name": "Active", "value": "Active" },
+        { "name": "Alumni", "value": "Alumni" },
+        { "name": "Future", "value": "Future" }
+      ],
+      "field": "status",
+      "type": "text",
+      "is_add": true,
+      "is_update": true,
+      "is_group": true,
+      "component": "RecordsTableDataStatus"
+    },
+    {
+      "name": "Start date",
+      "is_visible": true,
+      "parent": null,
+      "dropdown": false,
+      "field": "start_date",
+      "type": "date",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDate"
+    },
+    {
+      "name": "End date",
+      "is_visible": false,
+      "parent": null,
+      "dropdown": false,
+      "field": "end_date",
+      "type": "date",
+      "is_add": true,
+      "is_update": true,
+      "component": "RecordsTableDataDate"
+    }
+  ],
+
+  "tab_fields": {
+    "projects": {
+      "type": "assign",
+      "start_date": true,
+      "end_date": true,
+      "percentage_alloaction": true,
+      "field": {
+        "name": "Project",
+        "is_visible": true,
+        "parent": null,
+        "field": "projects",
+        "type": "text",
+        "options": null,
+        "is_assign_dropdown": true,
+        "store_assign_info": false,
+        "get_from": "projectStore",
+        "get_from_field": "name",
+        "get_from_value": "_id",
+        "assign_to_field": "people",
+        "component": "RecordsTableDataDefault"
+      }
+    },
+
+    "documents": {
+      "type": "document",
+      "fields": [
+        {
+          "name": "Documents",
+          "is_visible": true,
+          "table_view": false,
+          "parent": null,
+          "dropdown": false,
+          "field": "documents",
+          "type": "text",
+          "is_update": false,
+          "component": "RecordsTableDataDefault"
+        }
+      ]
+    },
+    "notes": {
+      "type": "note",
+      "fields": [
+        {
+          "name": "Notes",
+          "is_visible": true,
+          "table_view": true,
+          "parent": null,
+          "dropdown": false,
+          "field": "notes",
+          "type": "text",
+          "is_update": false,
+          "component": "RecordsTableDataDefault"
+        }
+      ]
+    },
+
+    "history": {
+      "type": "history",
+      "fields": [
+        {
+          "name": "Update logs",
+          "is_visible": true,
+          "table_view": false,
+          "parent": null,
+          "dropdown": false,
+          "field": "update_logs",
+          "type": "text",
+          "is_update": false,
+          "component": "RecordsTableDataDefault"
+        }
+      ]
+    }
+  },
+  "roles": [
+    {
+      "name": "admin",
+      "apply_when": {
+        "%%true": {
+          "%function": {
+            "name": "is_admin"
+          }
+        }
+      },
+      "document_filters": {
+        "write": true,
+        "read": true
+      },
+      "fields": {
+        "primary_email": {
+          "read": true,
+          "write": false
+        }
+      },
+      "read": true,
+      "write": true,
+      "insert": true,
+      "delete": true,
+      "search": true
+    },
+    {
+      "name": "employee",
+      "apply_when": {
+        "%%true": {
+          "%function": {
+            "name": "is_admin"
+          }
+        }
+      },
+      "document_filters": {
+        "write": true,
+        "read": true
+      },
+
+      "fields": {
+        "projects": {
+          "write": false,
+          "read": false
+        },
+        "tasks": {
+          "write": false,
+          "read": false
+        },
+        "documents": {
+          "write": false,
+          "read": false
+        },
+        "notes": {
+          "write": false,
+          "read": false
+        },
+        "status": {
+          "write": false,
+          "read": false
+        },
+        "role": {
+          "write": false,
+          "read": false
+        },
+        "update_logs": {
+          "write": false,
+          "read": false
+        }
+      },
+      "read": true,
+      "write": false,
+      "insert": false,
+      "delete": false,
+      "search": true
+    }
+  ]
+}

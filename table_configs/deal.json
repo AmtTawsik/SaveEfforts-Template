@@ -1,0 +1,197 @@
+{
+	"config": [
+		{
+			"name": "Title",
+			"is_primary": true,
+			"is_visible": true,
+			"parent": null,
+			"dropdown": false,
+			"field": "name",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"component": "RecordsTableDataDefault"
+		},
+		{
+			"name": "Description",
+			"is_visible": true,
+			"parent": null,
+			"dropdown": false,
+			"field": "description",
+			"type": "textarea",
+			"is_add": true,
+			"is_update": true,
+			"component": "RecordsTableDataDefault"
+		},
+		{
+			"name": "Owner",
+			"is_visible": true,
+			"parent": null,
+			"dropdown": true,
+			"options": null,
+			"is_assign_dropdown": true,
+			"get_from": "personStore",
+			"get_from_field": "full_name",
+			"get_from_value": "_id",
+			"assign_to_field": "lead_of_projects",
+			"field": "lead",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"visibility": "isLeadVisible",
+			"component": "RecordsTableDataPeople2"
+		},
+		{
+			"name": "Prospect",
+			"is_visible": true,
+			"parent": null,
+			"dropdown": true,
+			"options": null,
+			"is_assign_dropdown": true,
+			"get_from": "contactStore",
+			"get_from_field": "full_name",
+			"get_from_value": "_id",
+			"assign_to_field": "client",
+			"field": "client",
+			"type": "text",
+			"is_add": true,
+			"is_update": true,
+			"visibility": "isOwnerVisible",
+			"component": "RecordsTableDataPeople2"
+		},
+		{
+			"name": "Status",
+			"is_visible": true,
+			"parent": null,
+			"field": "status",
+			"type": "text",
+			"dropdown": true,
+			"options": [
+				{ "name": "Prospect", "value": "Prospect" },
+				{ "name": "Needs Defined", "value": "Needs Defined" },
+				{ "name": "Proposal", "value": "Proposal" },
+				{ "name": "Negotiation", "value": "Negotiation" },
+				{ "name": "Closed Won", "value": "Closed Won" },
+				{ "name": "Closed Lost", "value": "Closed Lost" }
+			],
+			"is_add": true,
+			"is_update": true,
+			"is_group": true,
+			"component": "RecordsTableDataDefault"
+		},
+
+		{
+			"name": "Size",
+			"is_visible": true,
+			"parent": null,
+			"field": "size",
+			"type": "number",
+			"dropdown": false,
+			"is_add": true,
+			"is_update": true,
+			"is_group": true,
+			"component": "RecordsTableDataDefault"
+		}
+	],
+
+	"tab_fields": {
+		"notes": {
+			"type": "note",
+			"fields": [
+				{
+					"name": "Notes",
+					"is_visible": true,
+					"table_view": true,
+					"parent": null,
+					"dropdown": false,
+					"field": "notes",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		},
+
+		"documents": {
+			"type": "document",
+			"fields": [
+				{
+					"name": "Documents",
+					"is_visible": true,
+					"table_view": false,
+					"parent": null,
+					"dropdown": false,
+					"field": "documentes",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		},
+
+		"history": {
+			"type": "history",
+			"fields": [
+				{
+					"name": "Update logs",
+					"is_visible": true,
+					"table_view": false,
+					"parent": null,
+					"dropdown": false,
+					"field": "update_logs",
+					"type": "text",
+					"is_update": false,
+					"component": "RecordsTableDataDefault"
+				}
+			]
+		}
+	},
+
+	"roles": [
+		{
+			"name": "admin",
+			"apply_when": {
+				"%%true": {
+					"%function": {
+						"name": "is_admin"
+					}
+				}
+			},
+			"document_filters": {
+				"write": true,
+				"read": true
+			},
+			"read": true,
+			"write": true,
+			"insert": true,
+			"delete": true,
+			"search": true
+		},
+		{
+			"name": "employee",
+			"apply_when": {
+				"%%true": {
+					"%function": {
+						"name": "is_admin"
+					}
+				}
+			},
+			"document_filters": {
+				"write": true,
+				"read": true
+			},
+
+			"fields": {
+				"projects": {
+					"write": false,
+					"read": false
+				}
+			},
+			"read": true,
+			"write": false,
+			"insert": false,
+			"delete": false,
+			"search": true
+		}
+	]
+}
